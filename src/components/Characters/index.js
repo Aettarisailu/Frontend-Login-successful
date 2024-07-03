@@ -8,7 +8,7 @@ const Characters = () => {
   const { characters, next, previous, status } = useSelector((state) => state.characters);
 
   useEffect(() => {
-    dispatch(fetchCharacters('https://swapi.dev/api/people'));
+    dispatch(fetchCharacters('https://borganics.in/'));
   }, [dispatch]);
 
   return (

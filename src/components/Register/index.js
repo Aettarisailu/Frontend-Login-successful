@@ -17,7 +17,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5010/api/register', formData);
+      const response = await axios.post('https://new-user-creating-backend-59o7.onrender.com/api/register', formData);
       alert(response.data.message);
     } catch (error) {
       alert('Error registering user');

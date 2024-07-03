@@ -13,7 +13,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5010/api/forgot-password', { email });
+      const response = await axios.post('https://new-user-creating-backend-59o7.onrender.com/api/forgot-password', { email });
       alert(response.data.message);
     } catch (error) {
       alert('Error sending password reset link');

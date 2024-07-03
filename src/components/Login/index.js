@@ -7,7 +7,6 @@ const Login = () => {
     email: '',
     password: ''
   });
-  const [swapiData, setSwapiData] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,16 +16,18 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5010/api/login', formData);
+      const response = await axios.post('https://new-user-creating-backend-59o7.onrender.com/api/login', formData);
       alert('Login successful');
       localStorage.setItem('token', response.data.token);
-
-      // Fetch data from SWAPI after successful login
-      const swapiResponse = await axios.get('https://swapi.dev/api/people');
-      setSwapiData(swapiResponse.data);
-      console.log(swapiResponse.data);
+      // Redirect to the URL after successful login
+      window.location.href = 'https://www.google.co.in/';
     } catch (error) {
-      alert('Invalid email or password');
+      if (error.response && error.response.data) {
+        alert(error.response.data.message); // Display specific error message from backend
+      } else {
+        console.error('Login error:', error);
+        alert('Invalid password'); // Fallback generic message for other errors
+      }
     }
   };
 
@@ -38,12 +39,6 @@ const Login = () => {
         <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
         <button type="submit">Login</button>
       </form>
-      {swapiData && (
-        <div className="swapi-data">
-          <h3>SWAPI Data</h3>
-          <pre>{JSON.stringify(swapiData, null, 2)}</pre>
-        </div>
-      )}
     </div>
   );
 };
